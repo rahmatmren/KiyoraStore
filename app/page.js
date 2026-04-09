@@ -424,7 +424,7 @@ export default function KiyoraStore() {
               {/* GANTI 'src' DI BAWAH INI DENGAN PATH/URL GAMBAR LOGOMU */}
               {/* Contoh: src="/images/my-logo.png" atau src="https://link-gambarmu.com/logo.jpg" */}
               <img 
-                src="https://via.placeholder.com/150/111113/E11D48?text=IMG" 
+                src="https:/Logo.png" 
                 alt="Logo Kiyora" 
                 className="w-full h-full object-contain rounded-md"
               />
