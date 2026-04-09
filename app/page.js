@@ -248,7 +248,7 @@ const LiveActivity = () => {
   const activities = [
     "Someone just purchased CapCut Pro (1 Month)",
     "Someone just bought Alight Motion (1 Year)",
-    "New user registered from Jakarta",
+    "New user registered from Kyoto",
     "Someone just purchased Canva Pro Invite"
   ];
 
@@ -582,7 +582,7 @@ export default function KiyoraStore() {
           </h1>
           
           <p className="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-            Instant access to premium tools. Designed for creators who demand the best, delivered with Japanese precision and speed.
+            Access premium tools instantly. Built for creators who value precision, speed, and perfection.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
