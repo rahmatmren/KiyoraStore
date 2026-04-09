@@ -1,4 +1,4 @@
-;client
+"use client";
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ShoppingCart, ChevronDown, CheckCircle2, Star, MessageCircle, Play, Shield, Zap, Volume2, VolumeX, ArrowRight } from 'lucide-react';
 
