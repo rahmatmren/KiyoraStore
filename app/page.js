@@ -606,7 +606,7 @@ export default function KiyoraStore() {
             {[...Array(2)].map((_, groupIdx) => (
               <React.Fragment key={groupIdx}>
                 {[
-                  { name: "Rizky ***", text: "Fastest transaction ever. Got my CapCut Pro in 2 minutes!", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop" },
+                  { name: "Robby", text: "Fastest transaction ever. Got my CapCut Pro in 2 minutes!", image: "/testi1.jpeg?w=400&h=500&fit=crop" },
                   { name: "Sarah ***", text: "Very safe and reliable. The admin is also very responsive.", image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop" },
                   { name: "Budi ***", text: "Cheaper than official, works exactly the same. 10/10.", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=500&fit=crop" },
                   { name: "Ayu ***", text: "Been subscribing here for months, never had an issue.", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop" },
