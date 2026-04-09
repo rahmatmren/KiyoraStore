@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ShoppingCart, ChevronDown, CheckCircle2, Star, MessageCircle, Play, Shield, Zap, Volume2, VolumeX, ArrowRight } from 'lucide-react';
 
@@ -288,6 +287,34 @@ const LiveActivity = () => {
 
 export default function KiyoraStore() {
   const [soundEnabled, setSoundEnabled] = useState(true);
+  
+  // State untuk mengontrol Modal Logo Zoom
+  const [isLogoZoomed, setIsLogoZoomed] = useState(false);
+
+  // State untuk Premium Loading Screen
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+
+  // Logika Animasi Loading Screen
+  useEffect(() => {
+    let currentProgress = 0;
+    const interval = setInterval(() => {
+      // Memperlambat progress: Update setiap 250ms, naik 5-12% (Memakan waktu ~1.5 sampai 2 detik)
+      currentProgress += Math.floor(Math.random() * 8) + 5; 
+      
+      if (currentProgress >= 100) {
+        currentProgress = 100;
+        clearInterval(interval);
+        // Tahan sebentar di 100% lalu hilangkan layarnya
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 800);
+      }
+      setLoadingProgress(currentProgress);
+    }, 250); 
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Dynamic Favicon Injector
   useEffect(() => {
@@ -298,10 +325,7 @@ export default function KiyoraStore() {
         link.rel = 'icon';
         document.head.appendChild(link);
       }
-      
-      // JIKA KAMU PUNYA GAMBAR SENDIRI, GANTI LINK DI BAWAH INI
-      // Contoh: link.href = "/images/favicon.ico" atau link.href = "https://domain-mu.com/logo.png"
-      link.href = "/Favicon.png";;
+      link.href = "/Favicon.png";
     }
   }, []);
 
@@ -331,7 +355,8 @@ export default function KiyoraStore() {
     { name: "CapCut Pro", duration: "1 Week", price: "10.000", tag: null, color: "from-gray-700 to-black" },
     { name: "CapCut Pro", duration: "1 Month", price: "~20.000", tag: "Best Deal", color: "from-zinc-800 to-black" },
     { name: "Canva Pro Invite", duration: "1 Month", price: "10.000", tag: "Fast", color: "from-blue-600 to-purple-600" },
-    { name: "Spotify Premium", duration: "1 Month", price: "30k-35k", tag: "Coming Soon", color: "from-green-500 to-emerald-600", disabled: true },
+    { name: "Spotify Premium", duration: "1 Month", price: "", tag: "Coming Soon", color: "from-green-500 to-emerald-600", disabled: true },
+    { name: "Wink", duration: "1 Month", price: "", tag: "Coming Soon", color: "from-pink-500 to-rose-500", disabled: true },
   ];
 
   const faqs = [
@@ -357,7 +382,7 @@ export default function KiyoraStore() {
   }, []);
 
   return (
-    <div className="bg-[#050505] min-h-screen text-white font-sans overflow-x-hidden selection:bg-red-500/30">
+    <div className={`bg-[#050505] min-h-screen text-white font-sans overflow-x-hidden selection:bg-red-500/30 ${isLoading ? 'h-screen overflow-hidden' : ''}`}>
       
       {/* Global Styles for specific animations */}
       <style dangerouslySetInnerHTML={{__html: `
@@ -412,19 +437,84 @@ export default function KiyoraStore() {
         }
       `}} />
 
+      {/* --- PREMIUM LOADING SCREEN --- */}
+      <div 
+        className={`fixed inset-0 z-[999999] bg-[#050505] flex flex-col items-center justify-center transition-all duration-1000 ease-[cubic-bezier(0.76,0,0.24,1)] ${isLoading ? 'opacity-100 translate-y-0' : 'opacity-0 pointer-events-none -translate-y-full'}`}
+      >
+        <div className="flex flex-col items-center relative z-10 w-full px-6">
+          {/* Logo Glow */}
+          <div className="relative mb-10 flex justify-center items-center">
+            <div className="absolute w-40 h-40 bg-red-600/20 blur-[50px] rounded-full animate-pulse" />
+            <div className="absolute w-20 h-20 bg-purple-600/30 blur-[30px] rounded-full animate-ping" />
+            <img 
+              src="/Logo.png" 
+              alt="Kiyora Loader" 
+              className="w-16 h-16 object-contain relative z-10 filter drop-shadow-[0_0_15px_rgba(225,29,72,0.8)]"
+            />
+          </div>
+
+          {/* Progress Bar Container */}
+          <div className="w-64 md:w-80 h-[2px] bg-white/10 rounded-full overflow-hidden relative mb-6">
+            <div 
+              className="absolute top-0 left-0 h-full bg-gradient-to-r from-red-500 to-purple-500 transition-all duration-300 ease-out"
+              style={{ width: `${loadingProgress}%` }}
+            />
+          </div>
+
+          {/* Centered System Text */}
+          <div className="flex flex-col items-center gap-3 text-xs font-mono uppercase tracking-widest text-center">
+            <span className="text-gray-400 animate-pulse">Sedang menyiapkan yang terbaik untuk anda 😇</span>
+            <span className="text-white font-bold text-sm bg-white/5 px-3 py-1 rounded-full border border-white/10">{loadingProgress}%</span>
+          </div>
+        </div>
+
+        {/* Decor Lines */}
+        <div className="absolute bottom-10 left-10 w-[1px] h-32 bg-gradient-to-t from-red-500/50 to-transparent opacity-50 hidden md:block" />
+        <div className="absolute top-10 right-10 w-32 h-[1px] bg-gradient-to-l from-purple-500/50 to-transparent opacity-50 hidden md:block" />
+      </div>
+
       <CustomCursor />
       <LiveActivity />
+
+      {/* --- LOGO ZOOM MODAL --- */}
+      <div 
+        className={`fixed inset-0 z-[99999] flex items-center justify-center transition-all duration-500 ease-in-out cursor-pointer ${isLogoZoomed ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        onClick={() => {
+          setIsLogoZoomed(false);
+          playSound('click', soundEnabled);
+        }}
+      >
+        {/* Background Overlay with Blur */}
+        <div className="absolute inset-0 bg-black/70 backdrop-blur-md" />
+        
+        {/* Enlarged Logo Image */}
+        <img 
+          src="/Logo.png" 
+          alt="Logo Kiyora Enlarged" 
+          className={`relative z-10 w-64 h-64 md:w-96 md:h-96 object-contain rounded-2xl shadow-[0_0_50px_rgba(225,29,72,0.4)] transition-all duration-500 ease-out ${isLogoZoomed ? 'scale-100 translate-y-0' : 'scale-75 translate-y-10'}`}
+        />
+        
+        {/* Helper Text */}
+        <p className={`absolute bottom-10 text-gray-400 text-sm tracking-widest uppercase transition-opacity duration-700 delay-300 ${isLogoZoomed ? 'opacity-100' : 'opacity-0'}`}>
+          Click anywhere to close
+        </p>
+      </div>
 
       {/* --- NAVBAR --- */}
       <nav className="fixed top-0 w-full z-50 bg-[#050505]/50 backdrop-blur-lg border-b border-white/5 transition-all">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo(0,0)}>
-            {/* Custom Image Logo Placeholder */}
-            <div className="relative flex items-center justify-center w-10 h-10 group-hover:scale-105 transition-transform duration-300 ease-out">
-              {/* GANTI 'src' DI BAWAH INI DENGAN PATH/URL GAMBAR LOGOMU */}
-              {/* Contoh: src="/images/my-logo.png" atau src="https://link-gambarmu.com/logo.jpg" */}
+            {/* Custom Image Logo Placeholder - NOW CLICKABLE */}
+            <div 
+              className="relative flex items-center justify-center w-10 h-10 group-hover:scale-105 transition-transform duration-300 ease-out"
+              onClick={(e) => {
+                e.stopPropagation(); // Mencegah ter-trigger fungsi scroll to top milik parent div
+                setIsLogoZoomed(true);
+                playSound('click', soundEnabled);
+              }}
+            >
               <img 
-                src="https:/Logo.png" 
+                src="/Logo.png" 
                 alt="Logo Kiyora" 
                 className="w-full h-full object-contain rounded-md"
               />
@@ -469,17 +559,24 @@ export default function KiyoraStore() {
           className={`relative z-10 text-center max-w-4xl mx-auto px-4 transition-all duration-1000 ease-out transform ${heroVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'}`}
           style={{ transform: `translate(${mousePos.x}px, ${mousePos.y}px)` }} // Subtle parallax
         >
-          <div className="inline-block mb-4 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm">
+          <a 
+            href="https://www.tiktok.com/@mattwithmiku" 
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => playSound('click', soundEnabled)}
+            onMouseEnter={() => playSound('hover', soundEnabled)}
+            className="inline-block mb-4 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-colors cursor-pointer"
+          >
             <span className="text-xs font-medium tracking-widest text-gray-300 uppercase flex items-center gap-2">
-              <Zap size={12} className="text-red-500" /> Premium Digital Assets
+              <Zap size={12} className="text-red-500" /> Powered By mattwithmiku
             </span>
-          </div>
+          </a>
           
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter mb-6 leading-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-gray-500">
-            Elevate Your <br />
+            Kiyora <br />
             <span className="relative">
               <span className="absolute -inset-2 bg-gradient-to-r from-red-500/20 to-purple-500/20 blur-xl rounded-lg" />
-              <span className="relative text-white">Creative Flow</span>
+              <span className="relative text-white">Digital Access</span>
             </span>
           </h1>
           
@@ -560,8 +657,14 @@ export default function KiyoraStore() {
 
                   <div>
                     <div className="text-2xl font-bold mb-4 flex items-baseline gap-1">
-                      <span className="text-sm text-gray-500 font-normal">Rp</span>
-                      {product.price}
+                      {product.price ? (
+                        <>
+                          <span className="text-sm text-gray-500 font-normal">Rp</span>
+                          {product.price}
+                        </>
+                      ) : (
+                        <span className="text-lg text-gray-500 font-normal italic">-</span>
+                      )}
                     </div>
                     
                     <button 
