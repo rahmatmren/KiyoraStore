@@ -711,10 +711,9 @@ export default function KiyoraStore() {
               <React.Fragment key={groupIdx}>
                 {[
                   { name: "Robby", text: "Fastest transaction ever. Got my CapCut Pro in 2 minutes!", image: "/testi1.jpeg?w=400&h=500&fit=crop" },
-                  { name: "Sarah ***", text: "Very safe and reliable. The admin is also very responsive.", image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop" },
-                  { name: "Budi ***", text: "Cheaper than official, works exactly the same. 10/10.", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=500&fit=crop" },
-                  { name: "Ayu ***", text: "Been subscribing here for months, never had an issue.", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop" },
-                  { name: "Dimas ***", text: "Premium feel, premium service. Highly recommended.", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop" }
+                  { name: "Oota nca", text: "Very safe and reliable. The admin is also very responsive.", image: "/testi2?w=400&h=500&fit=crop" },
+                  { name: "Robby", text: "This is my second purchase of CapCut Pro and it's very fast. 10/10.", image: "/testi3?w=400&h=500&fit=crop" },
+                  
                 ].map((review, idx) => (
                   <div key={idx} className="w-80 flex-shrink-0 bg-[#111113] border border-white/5 rounded-2xl p-6 hover:bg-[#16161a] transition-colors cursor-default group">
                     
