@@ -713,7 +713,7 @@ export default function KiyoraStore() {
                   { name: "Robby", text: "Fastest transaction ever. Got my CapCut Pro in 2 minutes!", image: "/testi1.jpeg?w=400&h=500&fit=crop" },
                   { name: "Oota nca", text: "Very safe and reliable. The admin is also very responsive.", image: "/testi2.jpeg?w=400&h=500&fit=crop" },
                   { name: "Robby", text: "This is my second purchase of CapCut Pro and it's very fast. 10/10.", image: "/testi3.jpeg?w=400&h=500&fit=crop" },
-                  { name: "Constantine graill", text: "The admin responds quickly and the price is also cheap.", image: "/testi4?w=400&h=500&fit=crop" },
+                  { name: "Constantine graill", text: "The admin responds quickly and the price is also cheap.", image: "/testi4.jpeg?w=400&h=500&fit=crop" },
                   { name: "CoomingSoon", text: "Cooming Soon", image: "/coomingsoon.jpeg?w=400&h=500&fit=crop" },
                   
                 ].map((review, idx) => (
