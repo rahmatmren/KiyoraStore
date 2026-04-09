@@ -352,9 +352,9 @@ export default function KiyoraStore() {
   const [faqRef, faqVisible] = useScrollReveal();
 
   const products = [
-    { name: "Alight Motion", duration: "1 Year", price: "15.000", tag: "Popular", color: "from-blue-500 to-cyan-400" },
+    { name: "Alight Motion", duration: "1 Year", price: "10.000", tag: "Popular", color: "from-blue-500 to-cyan-400" },
     { name: "CapCut Pro", duration: "1 Week", price: "10.000", tag: null, color: "from-gray-700 to-black" },
-    { name: "CapCut Pro", duration: "1 Month", price: "~20.000", tag: "Best Deal", color: "from-zinc-800 to-black" },
+    { name: "CapCut Pro", duration: "1 Month", price: "20.000", tag: "Best Deal", color: "from-zinc-800 to-black" },
     { name: "Canva Pro Invite", duration: "1 Month", price: "10.000", tag: "Fast", color: "from-blue-600 to-purple-600" },
     { name: "Spotify Premium", duration: "1 Month", price: "", tag: "Coming Soon", color: "from-green-500 to-emerald-600", disabled: true },
     { name: "Wink", duration: "1 Month", price: "", tag: "Coming Soon", color: "from-pink-500 to-rose-500", disabled: true },
