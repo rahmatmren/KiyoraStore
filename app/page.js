@@ -301,7 +301,7 @@ export default function KiyoraStore() {
       
       // JIKA KAMU PUNYA GAMBAR SENDIRI, GANTI LINK DI BAWAH INI
       // Contoh: link.href = "/images/favicon.ico" atau link.href = "https://domain-mu.com/logo.png"
-      link.href = `data:image/svg+xml,<svg xmlns="/Favicon.png" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23050505" rx="20"/><text y="75" x="25" font-family="monospace" font-size="70" font-weight="bold" fill="%23E11D48">K</text></svg>`;
+      link.href = "/Favicon.png";;
     }
   }, []);
 
